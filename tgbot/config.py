@@ -24,9 +24,15 @@ class Miscellaneous:
 
 
 @dataclass
+class Replicate:
+    token: str
+
+
+@dataclass
 class Config:
     tg_bot: TgBot
     db: DbConfig
+    replicate: Replicate
     misc: Miscellaneous
 
 
@@ -45,6 +51,9 @@ def load_config(path: str = None):
             password=env.str('DB_PASS'),
             user=env.str('DB_USER'),
             database=env.str('DB_NAME')
+        ),
+        replicate=Replicate(
+            token=env.str('REPLICATE_API_TOKEN')
         ),
         misc=Miscellaneous()
     )
