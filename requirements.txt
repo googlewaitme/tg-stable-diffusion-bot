@@ -3,3 +3,4 @@ aioredis<2.0
 environs~=9.0
 replicate
 googletrans==4.0.0-rc1
+sqlalchemy
