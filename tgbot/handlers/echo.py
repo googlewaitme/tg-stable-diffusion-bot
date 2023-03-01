@@ -15,7 +15,7 @@ async def bot_echo(message: types.Message, current_user):
     sd = StableDiffusion(repl_token)
     translator = Translator()
     output = translator.translate(message.text, dest='en')
-    # url = await sd.get_image_by_url(output.text)
+    url = await sd.get_image_by_url(output.text)
 
     db_session_factory = message.bot.get('db')
     session = db_session_factory()
@@ -28,8 +28,7 @@ async def bot_echo(message: types.Message, current_user):
     )
     session.add(generation)
     session.commit()
-    await message.answer('all okey')
-    # await message.answer_photo(url)
+    await message.answer_photo(url)
 
 
 async def bot_echo_all(message: types.Message, state: FSMContext):

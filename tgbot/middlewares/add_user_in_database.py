@@ -18,7 +18,8 @@ def get_or_create(session, model, **kwargs):
 
 
 class AddUserInDBMiddleware(BaseMiddleware):
-    async def on_process_message(self, message: Message, data: Dict[str, Any]) -> Any:
+    async def on_process_message(
+            self, message: Message, data: Dict[str, Any]) -> Any:
         user_id = message.from_user.id
         username = message.from_user.username
         db_session_factory = message.bot.get('db')
@@ -27,4 +28,3 @@ class AddUserInDBMiddleware(BaseMiddleware):
             session, User, telegram_id=user_id, name=username)
         session.commit()
         data['current_user'] = current_user
-        print('hello world')
